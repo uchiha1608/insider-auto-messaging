@@ -13,9 +13,14 @@ import (
 	"insider-auto-messaging/repository"
 )
 
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+
 type MessageService struct {
-	Repo  *repository.MessageRepository
-	Redis *redis.Client
+	Repo       repository.MessageRepo
+	Redis      *redis.Client
+	HTTPClient HTTPClient
 }
 
 type Payload struct {
@@ -43,7 +48,7 @@ func (s *MessageService) SendPendingMessages() {
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("x-ins-auth-key", "INS.me1x9uMcyYGlhKKQVPoc.bO3j9aZwRTOcA2Ywo")
 
-		resp, err := http.DefaultClient.Do(req)
+		resp, err := s.HTTPClient.Do(req)
 		if err != nil || resp.StatusCode != http.StatusAccepted {
 			fmt.Println("Error sending message:", err)
 			continue

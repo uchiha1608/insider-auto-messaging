@@ -9,8 +9,8 @@ import (
 )
 
 type MessageController struct {
-	Scheduler *scheduler.Scheduler
-	Repo      *repository.MessageRepository
+	Scheduler scheduler.Controller
+	Repo      repository.MessageRepo
 }
 
 // Start godoc

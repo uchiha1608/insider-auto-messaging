@@ -21,7 +21,7 @@ func main() {
 	rdb := config.InitRedis()
 
 	repo := &repository.MessageRepository{DB: db}
-	svc := &service.MessageService{Repo: repo, Redis: rdb}
+	svc := &service.MessageService{Repo: repo, Redis: rdb, HTTPClient: http.DefaultClient}
 	sched := &scheduler.Scheduler{Service: svc}
 	ctrl := &controller.MessageController{Scheduler: sched, Repo: repo}
 

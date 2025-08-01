@@ -11,16 +11,18 @@ This project implements a Golang-based automated messaging system as described i
 - ✅ RESTful API to start/stop scheduler and list sent messages
 - ✅ Auto database table migration
 - ✅ Swagger API docs with `swag init` support
+- ✅ Unit tests for service, controller, and repository layers
 
 ---
 
 ## 🚀 Tech Stack
 
-- Go 1.20+
+- Go 1.24
 - PostgreSQL
 - Redis
 - Docker & Docker Compose
 - Swagger (via [swaggo/swag](https://github.com/swaggo/swag))
+- Testify, sqlmock, redismock
 
 ---
 
@@ -100,7 +102,7 @@ This spins up:
 
 ### 2. Swagger UI
 
-Access Swagger docs at:
+Access Swagger docs at:  
 [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)
 
 ---
@@ -170,6 +172,37 @@ Use `redis-cli` to inspect:
 docker exec -it insider-auto-messaging-redis-1 redis-cli
 keys *
 get <message-id>
+```
+
+---
+
+## ✅ Run Unit Tests
+
+This project includes unit tests for:
+- `service/message_service.go`
+- `controller/message_controller.go`
+- `repository/message_repository.go`
+
+### 📦 Install test dependencies
+
+```bash
+go get github.com/stretchr/testify
+go get github.com/DATA-DOG/go-sqlmock
+go get github.com/go-redis/redismock/v9
+```
+
+### ▶ Run all tests
+
+```bash
+go test ./... -v
+```
+
+### ▶ Run tests for a specific package
+
+```bash
+go test ./service -v
+go test ./controller -v
+go test ./repository -v
 ```
 
 ---
