@@ -1,0 +1,90 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/sent": {
+            "get": {
+                "description": "Returns all messages that have been successfully sent.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Messages"
+                ],
+                "summary": "List sent messages",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Message"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/start": {
+            "get": {
+                "description": "Starts the background message-sending scheduler.",
+                "tags": [
+                    "Control"
+                ],
+                "summary": "Start auto message sending",
+                "responses": {
+                    "200": {
+                        "description": "Scheduler started",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stop": {
+            "get": {
+                "description": "Stops the background message-sending scheduler.",
+                "tags": [
+                    "Control"
+                ],
+                "summary": "Stop auto message sending",
+                "responses": {
+                    "200": {
+                        "description": "Scheduler stopped",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Message": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isSent": {
+                    "type": "boolean"
+                },
+                "messageID": {
+                    "type": "string"
+                },
+                "sentAt": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

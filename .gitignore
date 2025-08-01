@@ -1,0 +1,20 @@
+# Go
+/bin/
+/build/
+/*.exe
+*.out
+*.test
+*.log
+
+# Vendor / modules
+vendor/
+go.sum
+
+# IDEs
+.vscode/
+.idea/
+
+# Docker
+*.env
+*.local
+docker-compose.override.yml

@@ -1,0 +1,57 @@
+definitions:
+  model.Message:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+      isSent:
+        type: boolean
+      messageID:
+        type: string
+      sentAt:
+        type: string
+      to:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /sent:
+    get:
+      description: Returns all messages that have been successfully sent.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Message'
+            type: array
+      summary: List sent messages
+      tags:
+      - Messages
+  /start:
+    get:
+      description: Starts the background message-sending scheduler.
+      responses:
+        "200":
+          description: Scheduler started
+          schema:
+            type: string
+      summary: Start auto message sending
+      tags:
+      - Control
+  /stop:
+    get:
+      description: Stops the background message-sending scheduler.
+      responses:
+        "200":
+          description: Scheduler stopped
+          schema:
+            type: string
+      summary: Stop auto message sending
+      tags:
+      - Control
+swagger: "2.0"
